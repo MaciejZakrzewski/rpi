@@ -2,7 +2,6 @@
 #include <linux/init.h>       /* module_init, module_exit */
 #include <linux/module.h> /* version info, MODULE_LICENSE, MODULE_AUTHOR, printk() */
 
-
 /*===============================================================================================*/
 static int rpilcd_driver_init(void) {
   int result = 0;

@@ -7,6 +7,9 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <string.h>
+
+//#include <bcm2835.h>
+
 #define MAX_TIME 85
 #define MAX_TRIES 100
 #define DHT11PIN 7
@@ -120,9 +123,13 @@ int print_to_lcd_device(int fd, char* line1, char* line2) {
 // ---------------------------------------------------
 
 int main(int argc, char *argv[]) {
+
   int h; //humidity
   int t; //temperature in degrees Celsius
   int opt;
+
+
+
 
   // error out if wiringPi can't be used
   if (wiringPiSetup()==-1) {
@@ -143,9 +150,19 @@ int main(int argc, char *argv[]) {
   int tries=0;
   char timebuf[17]="\0";
   char valbuf[17]="\0";
+  
   while(1) {
+    char line[64] = "./servo ";
+    char integer_string[32];
+    sprintf(integer_string, "%d", t);
+    strcat(line, integer_string);
+    //printf(line);
+    system(line);
+    
+
     // read the sensor until we get a pair of valid measurements
     // but bail out if we tried too many times
+
     while (retval != 0 && tries < MAX_TRIES) {
       retval = dht11_read_val(&h, &t);
       if (retval == 0) {

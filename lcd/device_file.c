@@ -183,7 +183,6 @@ void rpilcd_clear_display(void) {
 /*===============================================================================================*/
 /*
  * initialise HD44780 lcd controller
- * voir http://www.mjmwired.net/kernel/Documentation/timers/timers-howto.txt
  */
 int rpilcd_init_display(void) {
   int i32_ret = 0;
@@ -237,7 +236,7 @@ int rpilcd_init_display(void) {
    */
   rpilcd_write_byte(0x28);
 
-  /* => Display On, Cursor On, Cursor Blink Off
+  /* => Display Off
    * RS R/W DB7 DB6 DB5 DB4
    * 0   0   0   0   0   0
    * 0   0   1   0   0   0
@@ -270,7 +269,7 @@ int rpilcd_init_display(void) {
   //rpilcd_write_byte(0x0F);
   /* RS R/W DB7 DB6 DB5 DB4 - on LCD cursor on, blinking off
    * 0   0   0   0   0   0
-   * 0   0   1   1   1   1
+   * 0   0   1   1   1   0
    */
   rpilcd_write_byte(0x0E);
 
